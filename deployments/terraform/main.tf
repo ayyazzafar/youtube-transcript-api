@@ -91,7 +91,7 @@ resource "google_cloud_run_service" "service" {
         ports {
           container_port = 80
         }
-        image = local.helloWorldImage
+        image = local.image
       }
     }
   }
