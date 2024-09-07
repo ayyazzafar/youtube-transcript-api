@@ -7,6 +7,12 @@ WORKDIR /usr/src/app
 # Copy the current directory contents into the container at /usr/src/app
 COPY . .
 
+# Download and install the CA certificate
+RUN apt-get update && \
+    apt-get install -y ca-certificates && \
+    curl -o /usr/local/share/ca-certificates/ca.crt https://raw.githubusercontent.com/luminati-io/luminati-proxy/master/bin/ca.crt && \
+    update-ca-certificates
+
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 

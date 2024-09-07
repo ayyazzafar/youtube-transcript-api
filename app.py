@@ -15,8 +15,8 @@ def get_youtube_transcript():
 
     video_id = video_url.split("v=")[1]
     try:
-        proxyUrl = 'brd-customer-hl_ad65f0f9-zone-residential_proxy1:76r52c3q5iz7@brd.superproxy.io:22225'
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, proxies={ 'http': 'http://' + proxyUrl})
+        proxyUrl = 'brd-customer-hl_ad65f0f9-zone-residential_proxy1-country-us:76r52c3q5iz7@brd.superproxy.io:22225'
+        transcript = YouTubeTranscriptApi.get_transcript(video_id, proxies={ 'https': 'https://' + proxyUrl})
         return jsonify({"video_id": video_id, "transcript": transcript})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
