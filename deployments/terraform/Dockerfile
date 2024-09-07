@@ -13,8 +13,6 @@ RUN apt-get update && \
     curl -o /usr/local/share/ca-certificates/ca.crt https://raw.githubusercontent.com/luminati-io/luminati-proxy/master/bin/ca.crt && \
     update-ca-certificates
 
-# Copy the SSL certificate to a known location
-COPY ca.crt /usr/local/share/ca-certificates/ca.crt
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
