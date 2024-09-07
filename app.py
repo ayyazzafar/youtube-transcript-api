@@ -1,7 +1,7 @@
 from pytube import YouTube
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from thirdparty.youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api import YouTubeTranscriptApi
 
 app = Flask(__name__)
 CORS(app)  # This will enable CORS for all routes
@@ -16,9 +16,9 @@ def get_youtube_transcript():
     video_id = video_url.split("v=")[1]
     try:
         proxyUrl = 'brd-customer-hl_ad65f0f9-zone-residential_proxy1:76r52c3q5iz7@brd.superproxy.io:22225'
-        proxies = {'https': 'https://' + proxyUrl}
-        ca_cert = './ca.crt'  # Update this path to your CA certificate file
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, proxies=proxies, ca_cert=ca_cert)
+        transcript = YouTubeTranscriptApi.get_transcript(video_id,  proxies={
+             'https': 'https://' + proxyUrl,
+             'http': 'http://' + proxyUrl})
         return jsonify({"video_id": video_id, "transcript": transcript})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
